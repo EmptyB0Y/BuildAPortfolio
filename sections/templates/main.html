@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Portfolio</title>
+        <link rel="stylesheet" href="{% static 'styles\main.css' %}" />
+    </head>
+    <body>
+        <div class="main-container">
+            <h1>Portfolio</h1>
+            <div id="skills-scroller-container">
+                <img id="left-paddle" class="skill-arrow" src="{% static 'icons\arrow-left.png' %}">
+                <div id="skills-scroller">
+                    {% for skill in skills %}
+                    <div class="skill-pane">
+                
+                        <span class="skill-info skill-name">{{ skill.name }}</span> 
+                        </br>
+                        <span class="skill-info skill-description">{{ skill.description }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+               <img id="right-paddle" class="skill-arrow" src="{% static 'icons\arrow-right.png' %}">
+            </div>
+        </div>
+        <script src="{% static 'js\scroll.js' %}"></script>
+    </body>
+</html>  

@@ -1,0 +1,78 @@
+html, body {
+    margin:0px;
+    height:100%;
+}
+
+.main-container
+{ 
+    background-image: url("../images/default_wallpaper.jpg"); 
+    background-size: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#skills-scroller-container
+{
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#skills-scroller
+{
+    scroll-behavior: smooth;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+}
+
+.skill-pane
+{
+    background-color: aliceblue;
+    border-radius: 5px;
+    flex-direction: column;
+    min-inline-size: 200px;
+    height: 200px;
+    margin: 5px;
+    opacity: 0.8;
+}
+
+.skill-pane:hover
+{
+    border: 1px black solid;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.skill-info
+{
+    text-align: center;
+}
+
+.skill-arrow
+{
+    position: absolute;
+    z-index: 1;
+    width: 100px;
+    cursor: pointer;
+}
+
+#right-paddle
+{
+    margin-left: 70%;
+}
+
+#left-paddle
+{
+    margin-right: 70%;
+}

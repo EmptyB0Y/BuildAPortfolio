@@ -1,15 +1,17 @@
 from django.shortcuts import redirect,render
 from sections.models import Skill,Story
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from django import forms
 from .models import Story
+from django.views.generic import ListView, CreateView  # new
 
 
 class StoryForm(forms.ModelForm):
     class Meta:
         model = Story
-        fields  = ['title','category','content']
+        fields  = ['title','category','content','cover']
         widgets = {
             'content': forms.Textarea(attrs={'cols': 100, 'rows': 30}),
         }
@@ -34,10 +36,26 @@ def skills(request):
     return render(request,'skill.html',
     {'skills': skills})
 
-@login_required
-def add_stories(request):
-    form = StoryForm
-    return render(request, 'addstories.html',{ "form" :form})
+@method_decorator(login_required, name="dispatch")
+class add_stories(CreateView):  # new
+    model = Story
+    form_class = StoryForm
+    template_name = "addstories.html"
+    success_url = '/'
+
+# @login_required
+# def add_stories(request):
+#     form = StoryForm
+#     if request.method == "POST":
+#         if form.is_valid:
+#             title = request.POST.get('title')
+#             category = request.POST.get('category')
+#             content = request.POST.get('content')
+#             cover = request.POST.get('cover')
+#             story_obj = Story(title = title, category = category, content = content, cover = cover)
+#             story_obj.save()
+#             return redirect('/')
+#     return render(request, 'addstories.html',{ "form" :form})
 
 @login_required
 def add_skills(request):

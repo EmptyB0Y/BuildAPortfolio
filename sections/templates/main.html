@@ -25,8 +25,19 @@
 
             <div id="stories-scroller-container">
                 {% for story in stories %}
-                {{story.title}}
-                <img src="media/{{story.cover}}">
+                <div class="story-pane">
+                    <span class="story-banner">
+                        {% if story.cover %}
+                            <img src="media/{{story.cover}}">
+                        {% else %}
+                            <img src="{% static 'images\default_wallpaper.jpg' %}">
+
+                        {% endif %}
+                    </span>
+                    <h1 class="story-title">{{story.title}}</h1>
+                    <p>{{story.category}}</p>
+                    <p>{{story.content}}</p>
+                </div>
                 {% endfor %}
             </div> 
         </div>

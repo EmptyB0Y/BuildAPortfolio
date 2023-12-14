@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Portfolio</title>
+        <link rel="stylesheet" href="{% static 'styles\story.css' %}" />
+    </head>
+    <body>
+        <div class="story-container">
+            <span class="story-banner">
+                {% if story.cover %}
+                    <img src="media/{{story.cover}}">
+                {% else %}
+                    <img src="{% static 'images\default_wallpaper.jpg' %}">
+                {% endif %}
+            </span>
+            <h1 class="story-title">{{story.title}}</h1>
+            <p class="story-category">{{story.category}}</p>
+            <p class="story-content">{{story.content}}</p>
+        </div>
+    </body>
+</html>

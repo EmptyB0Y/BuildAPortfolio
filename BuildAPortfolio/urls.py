@@ -22,7 +22,8 @@ from django.conf.urls.static import static  # new
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include("django.contrib.auth.urls")),
-    path('', sectionsViews.main),
+    path('', sectionsViews.mosaic),
+    path('story/<int:id>/',sectionsViews.story, name="story"),
     path('addstories/', sectionsViews.add_stories.as_view()),
     path('addskills/', sectionsViews.add_skills)
 ]

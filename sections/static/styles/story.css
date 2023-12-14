@@ -1,0 +1,14 @@
+img{
+    max-width: 100%;
+    height: auto;
+}
+.story-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px;
+}
+.story-banner{
+    width: 1000px;
+    overflow: hidden;
+}

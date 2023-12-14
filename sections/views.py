@@ -36,6 +36,15 @@ def skills(request):
     return render(request,'skill.html',
     {'skills': skills})
 
+def mosaic_photos(request):
+    stories = Story.objects.all()
+    s1,s2,s3,s4 = get_sublists(stories,4)
+    return render(request,'mosaic_photos.html',
+    {'stories1': s1,
+     'stories2': s2,
+     'stories3': s3,
+     'stories4': s4})
+
 def mosaic(request):
     stories = Story.objects.all()
     s1,s2,s3,s4 = get_sublists(stories,4)
@@ -47,6 +56,7 @@ def mosaic(request):
 
 def story(request, id):
     story = Story.objects.get(id=id)
+    print(story.cover)
     return render(request, 'story.html', {'story' : story})
 
 @method_decorator(login_required, name="dispatch")

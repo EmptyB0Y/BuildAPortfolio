@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Portfolio</title>
+        <link rel="stylesheet" href="{% static 'styles\mosaic_photos.css' %}" />
+    </head>
+    <body>
+
+    <!-- Header -->
+    <div class="header">
+    <h1>Portfolio</h1>
+    <p>Resize the browser window to see the responsive effect.</p>
+    </div>
+
+    <!-- Photo Grid -->
+        <div class="row"> 
+            <div class="column">
+                {% for story in stories1 %}
+                <a class="story-link" href="{% url 'story' story.id %}">
+                    
+                <div class="story-pane">
+                    <span class="story-banner">
+                        {% if story.cover %}
+                            <img src="/media/{{story.cover}}">
+                        {% else %}
+                            <img src="{% static 'images\default_wallpaper.jpg' %}">
+
+                        {% endif %}
+                    </span>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="column">
+                {% for story in stories2 %}
+                <a class="story-link" href="{% url 'story' story.id %}">
+
+                <div class="story-pane">
+                    <span class="story-banner">
+                        {% if story.cover %}
+                            <img src="/media/{{story.cover}}">
+                        {% else %}
+                            <img src="{% static 'images\default_wallpaper.jpg' %}">
+
+                        {% endif %}
+                    </span>
+                </div>
+                </a>
+                {% endfor %}
+            </div>  
+            <div class="column">
+                {% for story in stories3 %}
+                <a class="story-link" href="{% url 'story' story.id %}">
+
+                <div class="story-pane">
+                    <span class="story-banner">
+                        {% if story.cover %}
+                            <img src="/media/{{story.cover}}">
+                        {% else %}
+                            <img src="{% static 'images\default_wallpaper.jpg' %}">
+
+                        {% endif %}
+                    </span>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="column">
+                {% for story in stories4 %}
+                <a class="story-link" href="{% url 'story' story.id %}">
+
+                <div class="story-pane">
+                    <span class="story-banner">
+                        {% if story.cover %}
+                            <img src="/media/{{story.cover}}">
+                        {% else %}
+                            <img src="{% static 'images\default_wallpaper.jpg' %}">
+
+                        {% endif %}
+                    </span>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+    </body>
+</html>

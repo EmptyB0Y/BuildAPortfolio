@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include("django.contrib.auth.urls")),
     path('', sectionsViews.mosaic),
+    path('photos/', sectionsViews.mosaic_photos),
     path('story/<int:id>/',sectionsViews.story, name="story"),
     path('addstories/', sectionsViews.add_stories.as_view()),
     path('addskills/', sectionsViews.add_skills)

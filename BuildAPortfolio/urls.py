@@ -22,11 +22,14 @@ from django.conf.urls.static import static  # new
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include("django.contrib.auth.urls")),
-    path('', sectionsViews.mosaic),
-    path('photos/', sectionsViews.mosaic_photos),
+    path('stories/', sectionsViews.mosaic),
+    path('shootings/', sectionsViews.mosaic_photos),
+    path('shooting/<int:id>/', sectionsViews.shooting, name="shooting"),
     path('story/<int:id>/',sectionsViews.story, name="story"),
     path('addstories/', sectionsViews.add_stories.as_view()),
-    path('addskills/', sectionsViews.add_skills)
+    path('addskills/', sectionsViews.add_skills),
+    path('addshootings/', sectionsViews.add_shooting),
+    path('addphotos/<int:shootingId>', sectionsViews.add_photos)
 ]
 
 if settings.DEBUG:  # new

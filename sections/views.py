@@ -1,10 +1,9 @@
 from django.shortcuts import redirect,render
-from sections.models import Skill,Story
+from sections.models import Skill,Story,Shooting,Photo
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
+from django.http import QueryDict
 from django import forms
-from .models import Story
 from django.views.generic import ListView, CreateView  # new
 from .utils import get_sublists
 
@@ -24,6 +23,16 @@ class SkillForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'cols': 100, 'rows': 30}),
         }
 
+class ShootingForm(forms.ModelForm):
+    class Meta:
+        model = Shooting
+        fields  = ['title','cover','order']
+
+class PhotoForm(forms.ModelForm):
+    class Meta:
+        model = Photo
+        fields  = ['title','image','shooting']
+
 def main(request):
     skills = Skill.objects.all()
     stories = Story.objects.all()
@@ -37,8 +46,8 @@ def skills(request):
     {'skills': skills})
 
 def mosaic_photos(request):
-    stories = Story.objects.all()
-    s1,s2,s3,s4 = get_sublists(stories,4)
+    shootings = Shooting.objects.all()
+    s1,s2,s3,s4 = get_sublists(shootings,4)
     return render(request,'mosaic_photos.html',
     {'stories1': s1,
      'stories2': s2,
@@ -59,12 +68,64 @@ def story(request, id):
     print(story.cover)
     return render(request, 'story.html', {'story' : story})
 
+def shooting(request, id):
+    shooting = Shooting.objects.get(id=id)
+    photos = Photo.objects.select_related().filter(shooting=id)
+
+    print(photos)
+    return render(request, 'shooting.html', {'shooting' : shooting, 'photos' : photos})
+
 @method_decorator(login_required, name="dispatch")
 class add_stories(CreateView):  # new
     model = Story
     form_class = StoryForm
     template_name = "addstories.html"
     success_url = '/'
+
+# @method_decorator(login_required, name="dispatch")
+# class add_shooting(CreateView):  # new
+#     model = Shooting
+#     form_class = ShootingForm
+#     template_name = "addshooting.html"
+#     success_url = '/'
+
+@login_required
+def add_shooting(request):
+    if request.method == 'POST':
+        form = ShootingForm(request.POST, request.FILES)
+        if form.is_valid():
+            shooting = form.save()
+            return redirect('/addphotos/'+str(shooting.id))
+    else:
+        form = ShootingForm()
+    return render(request, 'addshooting.html', {
+        'form': form
+    })
+
+@login_required
+def add_photos(request, shootingId):
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/addphotos/'+str(shootingId))
+    else:
+        form = PhotoForm()
+    return render(request, 'addphotos.html', {
+        'form': form
+    })
+
+@login_required
+def add_skills(request):
+    form = SkillForm
+    if request.method == "POST":
+        if form.is_valid:
+            name = request.POST.get('name')
+            description = request.POST.get('description')
+            skill_obj = Skill(name = name, description = description)
+            skill_obj.save()
+            return redirect('/')
+    return render(request, 'addskills.html',{ "form" :form})
 
 # @login_required
 # def add_stories(request):
@@ -79,15 +140,3 @@ class add_stories(CreateView):  # new
 #             story_obj.save()
 #             return redirect('/')
 #     return render(request, 'addstories.html',{ "form" :form})
-
-@login_required
-def add_skills(request):
-    form = SkillForm
-    if request.method == "POST":
-        if form.is_valid:
-            name = request.POST.get('name')
-            description = request.POST.get('description')
-            skill_obj = Skill(name = name, description = description)
-            skill_obj.save()
-            return redirect('/')
-    return render(request, 'addskills.html',{ "form" :form})

@@ -35,19 +35,19 @@ body {
   max-height: 30vh;
 }
 
-.story-pane{
+.shooting-pane{
   max-height: 50vh;
   border: 1px black solid !important;
   border-radius: 5px;
   overflow: hidden;
 }
 
-.story-link{
+.shooting-link{
   text-decoration: none;
   color: black;
 }
 
-.story-content
+.shooting-content
 {
   text-wrap: wrap;
 

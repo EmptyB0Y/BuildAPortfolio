@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h1>
+   <strong>Photos</strong>
+</h1>
+<div class="column is-full"></div>
+<form action="" method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+   {{ form.as_p }}
+   <!-- <input type="submit" value="Submit"> -->
+   <button class="button is-success" type="submit" value="Submit">Publish</button>
+</form>
+</div>
+{% endblock %}

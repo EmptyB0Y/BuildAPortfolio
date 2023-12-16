@@ -26,3 +26,25 @@ class Story(models.Model):
    
     def __str__(self):
         return self.title
+    
+
+class Shooting(models.Model):
+    title = models.CharField(max_length= 100)
+    cover = models.ImageField(upload_to='images/', null=True)
+    order = models.TextField()
+    created_at = models.DateTimeField(auto_now_add= True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+   
+    def __str__(self):
+        return self.title
+
+class Photo(models.Model):
+    title = models.CharField(max_length= 100)
+    image = models.ImageField(upload_to='images/', null=True)
+    shooting = models.ForeignKey(Shooting, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add= True)
+    updated_at = models.DateTimeField(auto_now=True)
+   
+    def __str__(self):
+        return self.title

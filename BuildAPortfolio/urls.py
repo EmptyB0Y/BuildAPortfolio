@@ -22,6 +22,7 @@ from django.conf.urls.static import static  # new
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include("django.contrib.auth.urls")),
+    path('', sectionsViews.base),
     path('stories/', sectionsViews.mosaic),
     path('shootings/', sectionsViews.mosaic_photos),
     path('shooting/<int:id>/', sectionsViews.shooting, name="shooting"),

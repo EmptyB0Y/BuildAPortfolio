@@ -33,6 +33,9 @@ class PhotoForm(forms.ModelForm):
         model = Photo
         fields  = ['title','image','shooting']
 
+def base(request):
+        return redirect('/shootings')
+
 def main(request):
     skills = Skill.objects.all()
     stories = Story.objects.all()

@@ -25,7 +25,7 @@ urlpatterns = [
     path('', sectionsViews.base),
     path('stories/', sectionsViews.mosaic),
     path('shootings/', sectionsViews.mosaic_photos),
-    path('shooting/<int:id>/', sectionsViews.shooting, name="shooting"),
+    path('shooting/<int:id>/', sectionsViews.shooting_mosaic, name="shooting"),
     path('story/<int:id>/',sectionsViews.story, name="story"),
     path('addstories/', sectionsViews.add_stories.as_view()),
     path('addskills/', sectionsViews.add_skills),

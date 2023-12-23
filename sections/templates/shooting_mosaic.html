@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Portfolio</title>
+        <link rel="stylesheet" href="{% static 'styles\mosaic_photos.css' %}" />
+    </head>
+    <body>
+
+    <!-- Header -->
+    <div class="header">
+    <h1>Portfolio</h1>
+    <p>Resize the browser window to see the responsive effect.</p>
+    </div>
+
+    <!-- Photo Grid -->
+        <div class="row"> 
+            <div class="column">
+                {% for shooting in stories1 %}
+                    
+                <div class="shooting-pane">
+                    <span class="shooting-banner">
+                        {% if shooting %}
+                            <img src="/media/{{shooting}}">
+                        {% else %}
+                            <img src="{% static 'images\default_wallpaper.jpg' %}">
+
+                        {% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="column">
+                {% for shooting in stories2 %}
+
+                <div class="shooting-pane">
+                    <span class="shooting-banner">
+                        {% if shooting %}
+                            <img src="/media/{{shooting}}">
+                        {% else %}
+                            <img src="{% static 'images\default_wallpaper.jpg' %}">
+
+                        {% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>  
+            <div class="column">
+                {% for shooting in stories3 %}
+
+                <div class="shooting-pane">
+                    <span class="shooting-banner">
+                        {% if shooting %}
+                            <img src="/media/{{shooting}}">
+                        {% else %}
+                            <img src="{% static 'images\default_wallpaper.jpg' %}">
+
+                        {% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="column">
+                {% for shooting in stories4 %}
+
+                <div class="shooting-pane">
+                    <span class="shooting-banner">
+                        {% if shooting %}
+                            <img src="/media/{{shooting}}">
+                        {% else %}
+                            <img src="{% static 'images\default_wallpaper.jpg' %}">
+
+                        {% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </body>
+</html>

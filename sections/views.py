@@ -75,8 +75,22 @@ def shooting(request, id):
     shooting = Shooting.objects.get(id=id)
     photos = Photo.objects.select_related().filter(shooting=id)
 
-    print(photos)
     return render(request, 'shooting.html', {'shooting' : shooting, 'photos' : photos})
+
+def shooting_mosaic(request, id):
+    shooting = Shooting.objects.get(id=id)
+    photos = Photo.objects.select_related().filter(shooting=id)
+
+    lst = []
+    lst.append(shooting.cover)
+    for p in photos:
+        lst.append(p.image)
+    s1,s2,s3,s4 = get_sublists(lst,4)
+    return render(request,'shooting_mosaic.html',
+    {'stories1': s1,
+     'stories2': s2,
+     'stories3': s3,
+     'stories4': s4})
 
 @method_decorator(login_required, name="dispatch")
 class add_stories(CreateView):  # new

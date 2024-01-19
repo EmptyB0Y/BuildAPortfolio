@@ -2,15 +2,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Portfolio</title>
+        <title>{{ title }}</title>
         <link rel="stylesheet" href="{% static 'styles\mosaic_photos.css' %}" />
     </head>
     <body>
 
     <!-- Header -->
     <div class="header">
-    <h1>Portfolio</h1>
-    <p>Resize the browser window to see the responsive effect.</p>
+        <h1 id="title">{{ title }}</h1>
+        <div id="navbar">
+            <div id="links">
+                <a class="link" href="/about">ABOUT</a>
+                <a class="link" href="/stories">STORIES</a>
+                <a class="link" href="/contact">CONTACT</a>
+
+            </div>
+            <div id="social">
+                <a href="https://www.instagram.com"><img src="{% static 'icons\instagram.png' %}"></a>
+                <a href="https://www.facebook.com/profile.php?id=61553328430876"><img src="{% static 'icons\facebook.png' %}"></a>
+            </div>
+        </div>
     </div>
 
     <!-- Photo Grid -->

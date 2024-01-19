@@ -8,10 +8,38 @@ body {
 }
 
 .header {
+  background: '/media/images/wallpaper7.jpg';
+  font-style: italic;
   text-align: center;
   padding: 32px;
+  display: flex;
+  justify-content: space-between;
 }
+.header img{
+  max-width: fit-content;
+}
+#navbar{
+  display: flex;
+  flex-direction: column;
+}
+#navbar a{
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  padding: 5px;
+}
+.link:hover{
+  border-bottom: 1px black solid;
+}
+#social{
+  padding: 5px;
+  display: flex;
+  align-self: flex-end;
+}
+#social img{
+  width: 5vh;
 
+}
 .row {
   display: -ms-flexbox; /* IE10 */
   display: flex;
@@ -25,7 +53,6 @@ body {
   -ms-flex: 25%; /* IE10 */
   flex: 25%;
   max-width: 25%;
-  padding: 0 4px;
 }
 
 .column img {
@@ -34,11 +61,12 @@ body {
 }
 
 .shooting-pane{
-  max-height: 50vh;
   border: 1px black solid !important;
-  overflow: hidden;
 }
 
+.shooting-pane:hover {
+  border: 5px white solid !important;
+}
 .shooting-link{
   text-decoration: none;
   color: black;

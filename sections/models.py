@@ -48,3 +48,13 @@ class Photo(models.Model):
    
     def __str__(self):
         return self.title
+    
+class TitlePane(models.Model):
+    content = models.CharField(max_length= 100)
+    redirectLink = models.CharField(max_length= 100, default='/')
+    image = models.ImageField(upload_to='images/', null=True)
+    created_at = models.DateTimeField(auto_now_add= True)
+    updated_at = models.DateTimeField(auto_now=True)
+   
+    def __str__(self):
+        return self.content

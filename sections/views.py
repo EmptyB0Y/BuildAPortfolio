@@ -1,5 +1,5 @@
 from django.shortcuts import redirect,render
-from sections.models import Skill,Story,Shooting,Photo
+from sections.models import Skill,Story,Shooting,Photo, TitlePane
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.http import QueryDict
@@ -49,10 +49,19 @@ def skills(request):
     {'skills': skills})
 
 def mosaic_photos(request):
+    titlePanes = TitlePane.objects.all()
     shootings = Shooting.objects.all()
     s1,s2,s3,s4 = get_sublists(shootings,4)
+    title = 'AliasGwen'
+    cover = ''
+    if(titlePanes.__len__() >= 1):
+        title = titlePanes[0].content
+        if(titlePanes[0] != None):
+            cover = titlePanes[0].image
     return render(request,'mosaic_photos.html',
-    {'stories1': s1,
+    {'title': title,
+     'cover': cover,
+     'stories1': s1,
      'stories2': s2,
      'stories3': s3,
      'stories4': s4})
@@ -75,7 +84,7 @@ def shooting(request, id):
     shooting = Shooting.objects.get(id=id)
     photos = Photo.objects.select_related().filter(shooting=id)
 
-    return render(request, 'shooting.html', {'shooting' : shooting, 'photos' : photos})
+    return render(request, 'shooting.html', {'title': shooting.title,'shooting' : shooting, 'photos' : photos})
 
 def shooting_mosaic(request, id):
     shooting = Shooting.objects.get(id=id)
@@ -87,7 +96,8 @@ def shooting_mosaic(request, id):
         lst.append(p.image)
     s1,s2,s3,s4 = get_sublists(lst,4)
     return render(request,'shooting_mosaic.html',
-    {'stories1': s1,
+    {'title': shooting.title,
+     'stories1': s1,
      'stories2': s2,
      'stories3': s3,
      'stories4': s4})
